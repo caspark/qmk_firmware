@@ -8,3 +8,9 @@
 
 // turn on a layer with only 2 taps instead of the default 5
 #define TAPPING_TOGGLE 2
+
+// 2 taps to make a one shot key stick in the activated position
+#define ONESHOT_TAP_TOGGLE 2
+
+// auto release one shot modifiers once this many seconds have passed
+#define ONESHOT_TIMEOUT 5000

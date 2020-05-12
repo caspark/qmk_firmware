@@ -24,10 +24,17 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // Aliases for longer keycodes
 //     "12345678" is a visual guide to help ensure aliases are 8 characters or less so they fit
-#define CTLESC   CTL_T(KC_ESC)
+// mod taps - https://docs.qmk.fm/#/mod_tap
+#define CTLESC   MT(MOD_LCTL, KC_ESC)
+// one shot modifiers - https://docs.qmk.fm/#/one_shot_keys
+#define ONE_ALT  OSM(MOD_LALT)
+#define ONE_SFT  OSM(MOD_LSFT)
+#define ONE_WIN  OSM(MOD_LGUI)
+// tap tances - https://docs.qmk.fm/#/feature_tap_dance
 #define COLONS   TD(TD_COLON)
 #define LBRACKS  TD(TD_LBRACK)
 #define RBRACKS  TD(TD_RBRACK)
+// layers - https://docs.qmk.fm/#/feature_layers
 #define TAB_SYM  LT(LAYER_SYMBOLS, KC_TAB)
 
 // alt tab mode: hit the ALT_TAB key to switch once, also allows cycling through options (see code)
@@ -40,10 +47,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_EQL  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,ALT_TAB ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
-,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT
-         ,KC_GRV  ,KC_LGUI ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
-                                                               ,KC_CAPS ,KC_LALT /**/,KC_DEL  ,TAB_SYM
-                                                                        ,KC_LALT /**/,KC_PGUP
+,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,XXXXXXX
+         ,XXXXXXX ,ONE_WIN ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
+                                                               ,KC_CAPS ,XXXXXXX /**/,KC_DEL  ,TAB_SYM
+                                                                        ,ONE_ALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,KC_ENTER,KC_BSPC
 )
 

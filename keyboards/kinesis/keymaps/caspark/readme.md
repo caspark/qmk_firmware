@@ -6,5 +6,46 @@ and https://github.com/qmk/qmk_firmware/tree/master/keyboards/kinesis/keymaps/tu
 
 TODO:
 
+* make capslock LED turn on when a one shot modifier key is triggered
 * layer for navigation
 * layer for mouse keys?
+* add a qwerty layout that exactly matches what's on the keyboard, to make keyboard usable by others
+
+## Developing
+
+Set up vscode tasks:
+
+```bash
+cat > .vscode/tasks.json <<EOF
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "qmk compile",
+            "type": "shell",
+            "command": "qmk compile",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+EOF
+```
+
+Then hit `control+shift+b` in vscode to compile QMK.
+
+To flash:
+
+* download the Teensy loader from https://pjrc.com/teensy/loader.html
+* start teensy loader
+* hit RESET key on keyboard to fire up bootloader (or short GND and RST pins on the board)
+* the keyboard will "disconnect" and any leds on the board will turn off as the halfkay bootloader runs
+* teensy loader should recognise the board and change its little graphic display
+* hit the flash button on teensy loader and wait for the keyboard to be flashed
+* hit the reboot button on teensy loader
+* the keyboard will "reconnect" and the keyboard should now work again
