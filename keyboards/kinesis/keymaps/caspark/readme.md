@@ -6,7 +6,5 @@ and https://github.com/qmk/qmk_firmware/tree/master/keyboards/kinesis/keymaps/tu
 
 TODO:
 
-* alt tab key?
-* tap dance for colon?
 * layer for navigation
 * layer for mouse keys?
