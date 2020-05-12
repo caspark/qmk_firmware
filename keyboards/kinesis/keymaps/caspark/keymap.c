@@ -37,7 +37,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // one shot modifiers - https://docs.qmk.fm/#/one_shot_keys
 #define ONE_ALT  OSM(MOD_LALT)
 #define ONE_SFT  OSM(MOD_LSFT)
-#define ONE_WIN  OSM(MOD_LGUI)
 // tap tances - https://docs.qmk.fm/#/feature_tap_dance
 #define COLONS   TD(TD_COLON)
 #define LBRACKS  TD(TD_LBRACK)
@@ -57,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,ALT_TAB ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,XXXXXXX
-         ,XXXXXXX ,ONE_WIN ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
+         ,XXXXXXX ,KC_LGUI ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
                                                                ,KC_CAPS ,NAV     /**/,KC_DEL  ,TAB_SYM
                                                                         ,ONE_ALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,KC_ENTER,KC_BSPC
