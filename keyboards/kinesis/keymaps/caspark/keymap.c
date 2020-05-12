@@ -42,9 +42,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,ALT_TAB ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,KC_LSPO ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSPC
          ,KC_GRV  ,KC_LGUI ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
-                                                               ,KC_CAPS ,KC_LALT /**/,COLONS  ,TAB_SYM
+                                                               ,KC_CAPS ,KC_LALT /**/,KC_DEL  ,TAB_SYM
                                                                         ,KC_LALT /**/,KC_PGUP
-                                                      ,KC_SPC  ,CTLESC  ,KC_DEL  /**/,KC_PGDN ,KC_ENTER,KC_BSPC
+                                                      ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,KC_ENTER,KC_BSPC
 )
 
 ,[LAYER_SYMBOLS] = LAYOUT_pretty( // function keys on number row, numbers and symbols on home row
