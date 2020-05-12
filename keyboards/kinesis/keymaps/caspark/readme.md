@@ -49,3 +49,7 @@ To flash:
 * hit the flash button on teensy loader and wait for the keyboard to be flashed
 * hit the reboot button on teensy loader
 * the keyboard will "reconnect" and the keyboard should now work again
+
+Once this has been flashed once, bootmagic-lite will be enabled, so you can also enter the bootloader
+by holding the top-left-most key on the left keywell (`+/=` on the qwerty keymap) while plugging the
+keyboard in.
