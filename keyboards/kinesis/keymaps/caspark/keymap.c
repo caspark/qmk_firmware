@@ -111,15 +111,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-void repeat_key(uint16_t keycode, uint8_t count) {
-  for (int i=0; i < count; i++) {
-    // tap_code(keycode);
-    register_code(keycode);
-    unregister_code(keycode);
-  }
-}
-
-
 void matrix_init_user(void) {
 
 }
