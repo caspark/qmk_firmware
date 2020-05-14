@@ -11,6 +11,7 @@ enum kinesis_layers {
 enum custom_keycodes {
   MNYUP = SAFE_RANGE, // hit up a bunch of times
   MNYDOWN, // hit down a bunch of times
+  RM_LINE, // remove the current line of text
 };
 
 // Tap dancing setup - https://docs.qmk.fm/#/feature_tap_dance
@@ -95,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,DOCHOME ,DOCEND  ,_______ ,_______
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______
-,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,KC_HOME ,KC_LEFT ,KC_DOWN, KC_UP   ,KC_RGHT ,KC_END
+,_______ ,_______ ,_______ ,_______ ,_______ ,RM_LINE                            /**/                           ,KC_HOME ,KC_LEFT ,KC_DOWN, KC_UP   ,KC_RGHT ,KC_END
 ,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,_______ ,WRDLEFT ,MNYDOWN ,MNYUP   ,WRDRGHT ,_______
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
                                                                ,_______ ,_______ /**/,_______ ,WRDDEL
@@ -166,6 +167,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         many_word_down_held = false;
       }
       break;
+    case RM_LINE:
+      if (record->event.pressed) {
+        // this looks like an unnecessarily complicated way to delete a line, but it's necessary to cover:
+        // - not changing/messing with indentation of line above/below
+        // - "smart home" features in some editors
+        // - working correctly when the line is the first/last line
+        SEND_STRING(SS_TAP(X_HOME)SS_TAP(X_HOME)SS_DOWN(X_LSFT)SS_TAP(X_END)SS_TAP(X_RGHT)SS_UP(X_LSFT)SS_TAP(X_DEL));
+      }
     case LAY_GUI:
       if (ctlesc_down) {
         if (record->event.pressed) {
