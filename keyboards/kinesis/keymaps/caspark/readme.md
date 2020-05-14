@@ -29,7 +29,6 @@ It's easiest to look at keymap.c to see the full mapping, but in short:
 TODO:
 
 * make capslock LED turn on when a one shot modifier key is triggered
-* add a "true escape" button that resets turns off all layers except the base layer
 * add a qwerty layout that exactly matches what's on the keyboard, to make keyboard usable by others
 
 ## Developing
