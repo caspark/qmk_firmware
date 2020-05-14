@@ -7,8 +7,7 @@ and https://github.com/qmk/qmk_firmware/tree/master/keyboards/kinesis/keymaps/tu
 TODO:
 
 * make capslock LED turn on when a one shot modifier key is triggered
-* layer for navigation
-* layer for mouse keys?
+* add a "true escape" button that resets turns off all layers except the base layer
 * add a qwerty layout that exactly matches what's on the keyboard, to make keyboard usable by others
 
 ## Developing

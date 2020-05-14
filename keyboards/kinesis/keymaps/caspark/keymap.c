@@ -3,7 +3,8 @@
 enum kinesis_layers {
   LAYER_COLEMAK,   // Colemak (default layer)
   LAYER_SYMBOLS,   // Symbols, numbers, and function keys
-  LAYER_EDITING,   // Arrow keys and shortcuts for quick editing
+  LAYER_EDITING,   // Shortcuts for editing text (arrow keys and more)
+  LAYER_GUI,       // Shortcuts for navigating GUIs (mouse keys and more)
   LAYER_TEMPLATE,  // template layer for easy copy pasting to make new layers (not a real layer)
 };
 
@@ -44,7 +45,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define RBRACKS  TD(TD_RBRACK)
 // layers - https://docs.qmk.fm/#/feature_layers
 #define TAB_SYM  LT(LAYER_SYMBOLS, KC_TAB) // layer or tab
-#define NAV      MO(LAYER_EDITING) // momentary layer
+#define LAY_EDT  MO(LAYER_EDITING) // momentary layer
+#define LAY_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 
 // alt tab mode: hit the ALT_TAB key to switch once, also allows cycling through options (see code)
 bool alt_tab_activated;
@@ -61,10 +63,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  KC_ESC  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,KC_F6   ,KC_F7   ,KC_F8   /**/,KC_F9   ,KC_F10  ,KC_F11  ,KC_F12  ,KC_PSCR ,KC_SLCK ,KC_PAUS ,KC_INS  ,RESET
 ,KC_EQL  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
-,ALT_TAB ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
+,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,XXXXXXX
          ,XXXXXXX ,KC_LGUI ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
-                                                               ,NAV     ,KC_CAPS /**/,KC_DEL  ,TAB_SYM
+                                                               ,LAY_EDT ,KC_CAPS /**/,KC_DEL  ,TAB_SYM
                                                                         ,ONE_ALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,KC_ENTER,KC_BSPC
 )
@@ -82,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______
 )
 
-,[LAYER_EDITING] = LAYOUT_pretty( // arrow keys and such
+,[LAYER_EDITING] = LAYOUT_pretty( // arrow keys and other editing aids
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,DOCHOME ,DOCEND  ,_______ ,_______
@@ -93,6 +95,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                ,_______ ,_______ /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
+)
+
+,[LAYER_GUI] = LAYOUT_pretty( // mouse keys
+//______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+ _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+,_______ ,XXXXXXX ,KC_WH_L ,KC_MS_U ,KC_WH_R ,KC_WH_U                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+,_______ ,XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
+                                                               ,KC_ACL0 ,_______ /**/,_______ ,_______
+                                                                        ,_______ /**/,_______
+                                                      ,KC_BTN1 ,KC_BTN2 ,KC_BTN3 /**/,_______ ,_______ ,_______
 )
 
 ,[LAYER_TEMPLATE] = LAYOUT_pretty( // template layer, for easy copy pasting to make a new layer

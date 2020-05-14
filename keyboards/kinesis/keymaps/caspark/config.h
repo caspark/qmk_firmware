@@ -14,3 +14,6 @@
 
 // auto release one shot modifiers once this many seconds have passed
 #define ONESHOT_TIMEOUT 5000
+
+// mousekey settings - https://docs.qmk.fm/#/feature_mouse_keys
+#define MOUSEKEY_WHEEL_INTERVAL 25
