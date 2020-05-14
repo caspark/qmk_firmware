@@ -9,8 +9,7 @@ enum kinesis_layers {
 };
 
 enum custom_keycodes {
-  ALT_TAB = SAFE_RANGE, // special alt tab key
-  MNYUP, // hit up a bunch of times
+  MNYUP = SAFE_RANGE, // hit up a bunch of times
   MNYDOWN, // hit down a bunch of times
 };
 
@@ -54,7 +53,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LAY_EDT  MO(LAYER_EDITING) // momentary layer
 #define LAY_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 
-// alt tab mode: hit the ALT_TAB key to switch once, also allows cycling through options (see code)
+// special alt tab replacement: hold CTLESC and hit LAY_GUI one or more times to trigger alt tab
+bool ctlesc_down;
 bool alt_tab_activated;
 
 #define MANY_WORD_REPEAT_DELAY_MS 5
@@ -166,30 +166,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         many_word_down_held = false;
       }
       break;
-    case ALT_TAB:
-      alt_tab_activated = record->event.pressed;
-      if (alt_tab_activated) {
-        register_code(KC_LALT);
-        tap_code(KC_TAB);
-      } else {
-        unregister_code(KC_LALT);
+    case LAY_GUI:
+      if (ctlesc_down) {
+        if (record->event.pressed) {
+          if (!alt_tab_activated) {
+            alt_tab_activated = true;
+            unregister_code(KC_LCTL);
+            register_code(KC_LALT);
+          }
+          register_code(KC_TAB);
+        } else {
+          unregister_code(KC_TAB);
+        }
+        return false;
       }
       break;
     case CTLESC:
-      if (alt_tab_activated) {
-        if (record->event.pressed) {
-          tap_code(KC_TAB);
+      if (record->event.pressed) {
+        ctlesc_down = true;
+      } else {
+        if (alt_tab_activated) {
+          unregister_code(KC_LALT);
+          alt_tab_activated = false;
+          ctlesc_down = false;
+          return false;
         }
-        return false;
-      }
-    case KC_SPC:
-      if (alt_tab_activated) {
-        if (record->event.pressed) {
-          register_code(KC_LSFT);
-          tap_code(KC_TAB);
-          unregister_code(KC_LSFT);
-        }
-        return false;
+        ctlesc_down = false;
       }
       break;
   }

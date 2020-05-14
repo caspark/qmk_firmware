@@ -1,8 +1,29 @@
-# Caspar's keymap
+# Caspar's Kinesis Advantage keymap
 
 Inspired by https://asylum.madhouse-project.org/blog/2016/10/15/multi-purpose-keys/
 and by http://www.pvv.org/~hakonhal/main.cgi/keyboard/arensito_devel/
 and https://github.com/qmk/qmk_firmware/tree/master/keyboards/kinesis/keymaps/tuesdayjohn
+
+# What does it have?
+
+It's easiest to look at keymap.c to see the full mapping, but in short:
+
+* Base layer:
+  * Colemak alphanumeric layout
+  * hit `prgrm` key to reset keyboard (prepare it to be flashed)
+  * left arrow keys insert `[/{` on first press, `(` on second keypress
+  * Delete on left thumb cluster sends Esc on tap and Ctrl on hold.. unless CapsLock is pressed while it is held, in which case it acts like Alt+Tab
+  * a bunch of non-alphanumeric keys have been moved around - check the keymap :)
+* Symbol layer (hold Enter on right thumb cluster):
+  * function keys on number row
+  * core symbols on home row and top row, focusing on those symbols which are not easily accessible
+  * numbers mostly on bottom row (except for 0 and 1 which are under index fingers)
+* Edit layer for editing text (hold Ctrl on left thumb cluster):
+  * arrow keys available on right hand, along with home/end
+  * right hand also has shortcuts to move up/down lines faster, move by words, jump to end of doc, etc
+  * left hand has Ctrl+Z/X/C/V on those keys, and Redo on Ctrl+B
+* GUI layer for interacting with GUI apps (hold CapsLock)
+  * left hand has mouse keys
 
 TODO:
 
