@@ -62,7 +62,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LBRACKS  TD(TD_LBRACK)
 #define RBRACKS  TD(TD_RBRACK)
 // layers - https://docs.qmk.fm/#/feature_layers
-#define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or tab
+#define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or enter
 #define LAY_EDT  MO(LAYER_EDITING) // momentary layer
 #define LAY_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 
