@@ -106,11 +106,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,[LAYER_EDITING] = LAYOUT_pretty( // arrow keys and other editing aids
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
-,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,DOCHOME ,DOCEND  ,_______ ,_______
-,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______
-,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,KC_HOME ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,KC_END
-,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,WRDLFT  ,MNYDOWN ,MNYUP   ,WRDRGT  ,_______
-         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
+,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,DOCHOME ,MNYUP   ,DOCEND  ,_______ ,_______
+,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,KC_HOME ,KC_UP   ,KC_END  ,XXXXXXX ,_______
+,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,WRDLFT  ,KC_LEFT ,KC_DOWN ,KC_RGHT ,WRDRGT  ,XXXXXXX
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,XXXXXXX ,MNYDOWN ,XXXXXXX ,XXXXXXX ,_______
+         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______, _______
                                                                ,_______ ,_______ /**/,_______ ,WRDDEL
                                                                         ,_______ /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
