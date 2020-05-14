@@ -29,8 +29,18 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // Aliases for longer keycodes
 //     "12345678" is a visual guide to help ensure aliases are 8 characters or less so they fit
 // basic keys
-#define WRDLEFT  LCTL(KC_LEFT)
-#define WRDRGHT  LCTL(KC_RGHT)
+#define WRDLFT   LCTL(KC_LEFT)
+#define WRDRGT   LCTL(KC_RGHT)
+#define SEL_LFT  LSFT(KC_LEFT)
+#define SEL_RGT  LSFT(KC_RGHT)
+#define SEL_UP   LSFT(KC_UP)
+#define SEL_DWN  LSFT(KC_DOWN)
+#define SWRDLFT  LCTL(LSFT(KC_LEFT))
+#define SWRDRGT  LCTL(LSFT(KC_RGHT))
+#define SEL_HOM  LSFT(KC_HOME)
+#define SEL_END  LSFT(KC_END)
+#define ALT_UP   LALT(KC_UP)
+#define ALT_DWN  LALT(KC_DOWN)
 #define DOCHOME  LCTL(KC_HOME)
 #define DOCEND   LCTL(KC_END)
 #define WRDBSPC  LCTL(KC_BSPACE)
@@ -95,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,DOCHOME ,DOCEND  ,_______ ,_______
-,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______
-,_______ ,_______ ,_______ ,_______ ,_______ ,RM_LINE                            /**/                           ,KC_HOME ,KC_LEFT ,KC_DOWN, KC_UP   ,KC_RGHT ,KC_END
-,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,_______ ,WRDLEFT ,MNYDOWN ,MNYUP   ,WRDRGHT ,_______
+,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______
+,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,KC_HOME ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,KC_END
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,WRDLFT  ,MNYDOWN ,MNYUP   ,WRDRGT  ,_______
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
                                                                ,_______ ,_______ /**/,_______ ,WRDDEL
                                                                         ,_______ /**/,_______

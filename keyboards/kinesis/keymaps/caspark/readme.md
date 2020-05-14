@@ -19,9 +19,10 @@ It's easiest to look at keymap.c to see the full mapping, but in short:
   * core symbols on home row and top row, focusing on those symbols which are not easily accessible
   * numbers mostly on bottom row (except for 0 and 1 which are under index fingers)
 * Edit layer for editing text (hold Ctrl on left thumb cluster):
-  * arrow keys available on right hand, along with home/end
-  * right hand also has shortcuts to move up/down lines faster, move by words, jump to end of doc, etc
-  * left hand has Ctrl+Z/X/C/V on those keys, and Redo on Ctrl+B
+  * right hand has arrow keys plus home/end in a sort of vim-like configuration
+  * right hand also has shortcuts to move up/down lines faster, move by words, jump to start/end, etc
+  * left hand has traditional arrow cluster too but all movement modifies selection (i.e. as if shift is held)
+  * left hand also has Ctrl+Z/X/C/V on those keys, and Redo on B
 * GUI layer for interacting with GUI apps (hold CapsLock)
   * left hand has mouse keys
 
