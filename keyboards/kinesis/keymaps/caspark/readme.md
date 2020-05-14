@@ -13,7 +13,7 @@ It's easiest to look at keymap.c to see the full mapping, but in short:
   * Symbols on number row instead of numbers
   * hit `prgrm` key to reset keyboard (prepare it to be flashed)
   * Delete on left thumb cluster sends Esc on tap and Ctrl on hold.. unless CapsLock is pressed while it is held, in which case it acts like Alt+Tab
-  * a bunch of non-alphanumeric keys have been moved around - check the keymap :)
+  * a bunch of non-alphanumeric keys have been moved around, especially on the thumb clusters - check the keymap :)
 * Symbol layer (hold Enter on right thumb cluster):
   * function keys on number row
   * symbols on home row, focusing on those symbols which are common (per http://xahlee.info/comp/computer_language_char_distribution.html ) but not easily accessible
@@ -23,6 +23,7 @@ It's easiest to look at keymap.c to see the full mapping, but in short:
   * right hand also has shortcuts to move up/down lines faster, move by words, jump to start/end, etc
   * left hand has traditional arrow cluster too but all movement modifies selection (i.e. as if shift is held)
   * left hand also has Ctrl+Z/X/C/V on those keys, and Redo on B
+  * backspace and delete both delete whole words instead of individual characters
 * GUI layer for interacting with GUI apps (hold CapsLock)
   * left hand has mouse keys
 

@@ -79,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_TILD ,KC_EXLM ,KC_AT   ,KC_HASH ,KC_DLR  ,KC_PERC                            /**/                           ,KC_CIRC ,KC_AMPR ,KC_ASTR ,KC_LPRN ,KC_RPRN ,KC_UNDS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
-,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_TAB
+,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
          ,XXXXXXX ,KC_LGUI ,KC_LBRC ,KC_RBRC                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
-                                                               ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,KC_DEL
+                                                               ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,KC_TAB
                                                                         ,ONE_ALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,ENT_SYM  ,KC_BSPC
 )
@@ -104,9 +104,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,DOCHOME ,MNYUP   ,DOCEND  ,_______ ,_______
 ,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,KC_HOME ,KC_UP   ,KC_END  ,XXXXXXX ,_______
 ,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,WRDLFT  ,KC_LEFT ,KC_DOWN ,KC_RGHT ,WRDRGT  ,XXXXXXX
-,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,XXXXXXX ,MNYDOWN ,XXXXXXX ,XXXXXXX ,_______
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,XXXXXXX ,MNYDOWN ,XXXXXXX ,XXXXXXX ,WRDDEL
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______, _______
-                                                               ,_______ ,_______ /**/,_______ ,WRDDEL
+                                                               ,_______ ,_______ /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
 )
