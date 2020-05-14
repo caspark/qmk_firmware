@@ -23,8 +23,6 @@ enum {
 };
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_COLON] = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_SCLN),
-  [TD_LBRACK] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
-  [TD_RBRACK] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
 };
 
 // Aliases for longer keycodes
@@ -59,8 +57,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define ONE_SFT  OSM(MOD_LSFT)
 // tap tances - https://docs.qmk.fm/#/feature_tap_dance
 #define COLONS   TD(TD_COLON)
-#define LBRACKS  TD(TD_LBRACK)
-#define RBRACKS  TD(TD_RBRACK)
 // layers - https://docs.qmk.fm/#/feature_layers
 #define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or enter
 #define LAY_EDT  MO(LAYER_EDITING) // momentary layer
@@ -80,23 +76,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [LAYER_COLEMAK] = LAYOUT_pretty( // default base layer
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  TRU_ESC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,KC_F6   ,KC_F7   ,KC_F8   /**/,KC_F9   ,KC_F10  ,KC_F11  ,KC_F12  ,KC_PSCR ,KC_SLCK ,KC_PAUS ,KC_INS  ,RESET
-,KC_EQL  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
+,KC_TILD ,KC_EXLM ,KC_AT   ,KC_HASH ,KC_DLR  ,KC_PERC                            /**/                           ,KC_CIRC ,KC_AMPR ,KC_ASTR ,KC_LPRN ,KC_RPRN ,KC_UNDS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_TAB
-         ,XXXXXXX ,KC_LGUI ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
+         ,XXXXXXX ,KC_LGUI ,KC_LBRC ,KC_RBRC                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
                                                                ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,KC_DEL
                                                                         ,ONE_ALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,ENT_SYM  ,KC_BSPC
 )
-
 ,[LAYER_SYMBOLS] = LAYOUT_pretty( // function keys on number row, numbers and symbols on home row
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,KC_F12  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5                              /**/                           ,KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11
-,_______ ,KC_EXLM ,KC_AT   ,KC_HASH ,KC_DLR  ,_______                            /**/                           ,_______ ,KC_AMPR ,KC_ASTR ,KC_BSLS ,KC_PIPE ,_______
-,_______ ,KC_TILD ,KC_GRV  ,KC_EQL  ,KC_0    ,KC_PERC                            /**/                           ,KC_CIRC ,KC_1    ,KC_MINS ,KC_PLUS ,KC_UNDS ,KC_DQUO
-,_______ ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,_______                            /**/                           ,_______ ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,_______
+,_______ ,_______ ,_______ ,_______ ,_______ ,KC_LABK                            /**/                           ,KC_RABK ,_______ ,_______ ,_______ ,_______ ,_______
+,_______ ,KC_GRV  ,KC_PLUS ,KC_0    ,KC_EQL  ,KC_LPRN                            /**/                           ,KC_RPRN ,KC_UNDS, KC_1    ,KC_MINS ,KC_PIPE ,KC_DQUO
+,_______ ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_LCBR                            /**/                           ,KC_RCBR ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,_______
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
                                                                ,_______ ,_______ /**/,_______ ,_______
                                                                         ,_______ /**/,_______
