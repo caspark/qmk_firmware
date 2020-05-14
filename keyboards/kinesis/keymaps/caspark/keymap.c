@@ -33,7 +33,13 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define WRDRGHT  LCTL(KC_RGHT)
 #define DOCHOME  LCTL(KC_HOME)
 #define DOCEND   LCTL(KC_END)
-#define WRDBSPC  LCTL(KC_BSPC)
+#define WRDBSPC  LCTL(KC_BSPACE)
+#define WRDDEL   LCTL(KC_DEL)
+#define UNDO     LCTL(KC_Z)
+#define CUT      LCTL(KC_X)
+#define COPY     LCTL(KC_C)
+#define PASTE    LCTL(KC_V)
+#define REDO     LCTL(KC_Y)
 // mod taps - https://docs.qmk.fm/#/mod_tap
 #define CTLESC   MT(MOD_LCTL, KC_ESC)
 // one shot modifiers - https://docs.qmk.fm/#/one_shot_keys
@@ -44,7 +50,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LBRACKS  TD(TD_LBRACK)
 #define RBRACKS  TD(TD_RBRACK)
 // layers - https://docs.qmk.fm/#/feature_layers
-#define TAB_SYM  LT(LAYER_SYMBOLS, KC_TAB) // layer or tab
+#define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or tab
 #define LAY_EDT  MO(LAYER_EDITING) // momentary layer
 #define LAY_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 
@@ -64,11 +70,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_EQL  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
-,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,XXXXXXX
+,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_TAB
          ,XXXXXXX ,KC_LGUI ,LBRACKS ,RBRACKS                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
-                                                               ,LAY_EDT ,KC_CAPS /**/,KC_DEL  ,TAB_SYM
+                                                               ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,KC_DEL
                                                                         ,ONE_ALT /**/,KC_PGUP
-                                                      ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,KC_ENTER,KC_BSPC
+                                                      ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,ENT_SYM  ,KC_BSPC
 )
 
 ,[LAYER_SYMBOLS] = LAYOUT_pretty( // function keys on number row, numbers and symbols on home row
@@ -90,9 +96,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,DOCHOME ,DOCEND  ,_______ ,_______
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,KC_HOME ,KC_LEFT ,KC_DOWN, KC_UP   ,KC_RGHT ,KC_END
-,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,WRDLEFT ,MNYDOWN ,MNYUP   ,WRDRGHT ,_______
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,_______ ,WRDLEFT ,MNYDOWN ,MNYUP   ,WRDRGHT ,_______
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
-                                                               ,_______ ,_______ /**/,_______ ,_______
+                                                               ,_______ ,_______ /**/,_______ ,WRDDEL
                                                                         ,_______ /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
 )
