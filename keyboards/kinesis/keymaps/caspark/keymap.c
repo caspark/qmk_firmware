@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
-         ,XXXXXXX ,KC_LGUI ,KC_LBRC ,KC_RBRC                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
+         ,XXXXXXX ,KC_LGUI ,KC_LABK ,KC_RABK                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
                                                                ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,KC_TAB
                                                                         ,ONE_ALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,ENT_SYM  ,KC_BSPC
@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,KC_F12  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5                              /**/                           ,KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11
-,_______ ,_______ ,_______ ,_______ ,_______ ,KC_LABK                            /**/                           ,KC_RABK ,_______ ,_______ ,_______ ,_______ ,_______
+,_______ ,_______ ,_______ ,_______ ,_______ ,KC_LBRC                            /**/                           ,KC_RBRC ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,KC_GRV  ,KC_PLUS ,KC_0    ,KC_EQL  ,KC_LPRN                            /**/                           ,KC_RPRN ,KC_UNDS, KC_1    ,KC_MINS ,KC_PIPE ,KC_DQUO
 ,_______ ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_LCBR                            /**/                           ,KC_RCBR ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,_______
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
