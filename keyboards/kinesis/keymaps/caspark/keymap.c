@@ -84,10 +84,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                       ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,ENT_SYM  ,KC_BSPC
 )
 
-// Character Frequencies Reference
-// KC_DOT (6.6), KC_COMM (5.8), KC_QUOT (4.4), KC_SLSH (4.0), KC_SCLN (3.8) are accessible enough on the keyboard already
-// and KC_UNDS should be mostly typed as part of uppercase identifiers using shift-lock, so that leaves:
-// KC_LPRN, KC_RPRN are most common by far (7.4%), with remainder starting at 4.4:
+// Character Frequencies Reference from http://xahlee.info/comp/computer_language_char_distribution.html
+// KC_DOT (6.6), KC_COMM (5.8), KC_QUOT (4.4), KC_SLSH (4.0), KC_SCLN (3.8) are accessible enough on the keyboard already, so we start with:
+// KC_UNDS (11.4) and KC_LPRN + KC_RPRN (both 7.4) are most common by far, with remainder starting at 4.4:
 // KC_EQL, KC_MINS, KC_DQUOT, KC_ASTR, KC_COLN, KC_LABK, KC_DLR, KC_0, KC_HASH are greater than 2%
 // KC_LCBR, KC_RCBR, KC_1, KC_LABK, KC_AMPR, KC_BSLS, KC_2 are greater than 1%
 // KC_LBRC, KC_LBRC, KC_AT, KC_PIPE, KC_PLUS are greater than 0.5%
@@ -97,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,KC_F12  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5                              /**/                           ,KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11
 ,_______ ,_______ ,_______ ,KC_HASH ,KC_LBRC ,KC_RBRC                            /**/                           ,_______ ,KC_AMPR ,KC_1    ,KC_BSLS ,KC_COLN ,KC_PIPE
-,_______ ,KC_QUES ,KC_PLUS ,KC_EQL  ,KC_LPRN ,KC_RPRN                            /**/                           ,KC_COLN ,KC_MINS ,KC_0    ,KC_SLSH ,KC_PIPE ,KC_DQUO
+,_______ ,KC_QUES ,KC_PLUS ,KC_EQL  ,KC_LPRN ,KC_RPRN                            /**/                           ,KC_COLN ,KC_UNDS ,KC_0    ,KC_MINS ,KC_PIPE ,KC_DQUO
 ,_______ ,_______ ,KC_TILD ,KC_SLSH ,KC_LCBR ,KC_RCBR                            /**/                           ,_______ ,KC_ASTR ,_______ ,_______ ,_______, _______
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
                                                                ,_______ ,_______ /**/,_______ ,_______
