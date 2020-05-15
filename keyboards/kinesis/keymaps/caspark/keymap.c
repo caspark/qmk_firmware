@@ -18,8 +18,6 @@ enum custom_keycodes {
 // Tap dancing setup - https://docs.qmk.fm/#/feature_tap_dance
 enum {
   TD_COLON = 0,
-  TD_LBRACK,
-  TD_RBRACK,
 };
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_COLON] = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_SCLN),
@@ -55,7 +53,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define CTLESC   MT(MOD_LCTL, KC_ESC)
 // one shot modifiers - https://docs.qmk.fm/#/one_shot_keys
 #define ONE_ALT  OSM(MOD_LALT)
-#define ONE_SFT  OSM(MOD_LSFT)
 // tap tances - https://docs.qmk.fm/#/feature_tap_dance
 #define COLONS   TD(TD_COLON)
 // layers - https://docs.qmk.fm/#/feature_layers
@@ -80,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_GRV  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
-,ONE_SFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
+,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
          ,XXXXXXX ,KC_LGUI ,KC_LABK ,KC_RABK                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
                                                                ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,KC_TAB
                                                                         ,ONE_ALT /**/,KC_PGUP
@@ -200,6 +197,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // - working correctly when the line is the first/last line
         SEND_STRING(SS_TAP(X_HOME)SS_TAP(X_HOME)SS_DOWN(X_LSFT)SS_TAP(X_END)SS_TAP(X_RGHT)SS_UP(X_LSFT)SS_TAP(X_DEL));
       }
+      break;
     case LAY_GUI:
       if (ctlesc_down) {
         if (record->event.pressed) {
