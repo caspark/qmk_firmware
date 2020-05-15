@@ -9,15 +9,14 @@ and https://github.com/qmk/qmk_firmware/tree/master/keyboards/kinesis/keymaps/tu
 It's easiest to look at keymap.c to see the full mapping, but in short:
 
 * Base layer:
-  * Colemak layout for letters
-  * Symbols on number row instead of numbers
+  * Colemak layout for alphanumerics
   * hit `prgrm` key to reset keyboard (prepare it to be flashed)
   * Delete on left thumb cluster sends Esc on tap and Ctrl on hold.. unless CapsLock is pressed while it is held, in which case it acts like Alt+Tab
   * a bunch of non-alphanumeric keys have been moved around, especially on the thumb clusters - check the keymap :)
 * Symbol layer (hold Enter on right thumb cluster):
   * function keys on number row
   * symbols on home row, focusing on those symbols which are common (per http://xahlee.info/comp/computer_language_char_distribution.html ) but not easily accessible
-  * numbers mostly on bottom row (except for 0 and 1 which are under index fingers)
+  * right hand also has access to 0/1 on middle finger
 * Edit layer for editing text (hold Ctrl on left thumb cluster):
   * right hand has arrow keys plus home/end in an almost traditional arrow cluster
   * right hand also has shortcuts to move up/down lines faster, move by words, jump to start/end, etc
