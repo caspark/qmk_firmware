@@ -2,11 +2,11 @@
 
 enum kinesis_layers {
   LAYER_COLEMAK,   // Colemak (default layer)
+  LAYER_QWERTY,    // Qwerty layer (alternate default layer)
+  LAYER_GAMING,    // Gaming layer, with WASD mapped to qwerty's ESDF (alternate default layer)
   LAYER_SYMBOLS,   // Symbols, numbers, and function keys
   LAYER_EDITING,   // Shortcuts for editing text (arrow keys and more)
   LAYER_GUI,       // Shortcuts for navigating GUIs (mouse keys and more)
-  LAYER_GAMING,    // Gaming layer, with WASD mapped to qwerty's ESDF (alternate default layer)
-  LAYER_QWERTY,    // Qwerty layer (alternate default layer)
   LAYER_ADJUST,    // Mechanism for configuring the keyboard and swapping the base layers
   LAYER_TEMPLATE,  // template layer for easy copy pasting to make new layers (not a real layer)
 };
@@ -65,10 +65,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LAY_GAM  DF(LAYER_GAMING) // set default layer
 #define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or enter
 #define LAY_EDT  MO(LAYER_EDITING) // momentary layer
-#define LAY_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
+#define OSL_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
+#define MO_GUI   MO(LAYER_GUI) // momentary layer
 #define TAB_GUI  LT(LAYER_GUI, KC_ENTER) // layer or tab
 
-// special alt tab replacement: hold CTL_ESC and hit LAY_GUI one or more times to trigger alt tab
+// special alt tab replacement: hold CTL_ESC and hit OSL_GUI one or more times to trigger alt tab
 bool ctlesc_down;
 bool alt_tab_activated;
 
@@ -84,12 +85,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  TRU_ESC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,KC_F6   ,KC_F7   ,KC_F8   /**/,KC_F9   ,KC_F10  ,KC_F11  ,KC_F12  ,KC_PSCR ,KC_SLCK ,KC_PAUS ,KC_INS  ,LAY_ADJ
 ,KC_PLUS ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
-,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
+,OSL_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
          ,XXXXXXX ,KC_LGUI ,KC_GRV  ,KC_EQL                                      /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
                                                                ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,TAB_GUI
                                                                         ,ONE_ALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTL_ESC ,COLONS  /**/,KC_PGDN ,ENT_SYM ,KC_BSPC
+)
+
+,[LAYER_QWERTY] = LAYOUT_pretty( // qwerty layout, where every key does what it says on the keyboard (except maybe one or two of the function keys)
+//______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+ TRU_ESC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,KC_F6   ,KC_F7   ,KC_F8   /**/,KC_F9   ,KC_F10  ,KC_F11  ,KC_F12  ,KC_PSCR ,KC_SLCK ,KC_PAUS ,KC_INS  ,LAY_ADJ
+,KC_EQL  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
+,KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T                               /**/                           ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_BSLS
+,KC_CAPS ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G                               /**/                           ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOT
+,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT
+         ,KC_GRV  ,KC_PIPE ,KC_LEFT ,KC_RGHT                                     /**/                                    ,KC_UP   ,KC_DOWN ,KC_LBRC ,KC_RBRC
+                                                               ,KC_LCTL ,KC_LALT /**/,KC_RGUI  ,KC_RCTL
+                                                                        ,KC_HOME /**/,KC_PGUP
+                                                      ,KC_BSPC ,KC_DEL  ,KC_END  /**/,KC_PGDN ,KC_ENT  ,KC_SPC
+)
+
+,[LAYER_GAMING] = LAYOUT_pretty( // gaming layer - WASD is moved one row to the right, with TGB moving to where QAZ is normally (and stuff like GRV becomes LCTL)
+//______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+ _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+,_______ ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,_______
+,_______ ,KC_T    ,KC_Q    ,KC_W    ,KC_E    ,KC_R                               /**/                           ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,_______
+,MO_GUI  ,KC_G    ,KC_A    ,KC_S    ,KC_D    ,KC_F                               /**/                           ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,_______
+,_______ ,KC_B    ,KC_Z    ,KC_X    ,KC_C    ,KC_V                               /**/                           ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,_______
+         ,KC_LCTL ,KC_LALT ,KC_LEFT ,KC_RGHT                                     /**/                                    ,KC_UP   ,KC_DOWN ,KC_LBRC ,KC_RBRC
+                                                               ,KC_G    ,_______ /**/,_______ ,_______
+                                                                        ,_______ /**/,_______
+                                                      ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______
 )
 
 // Character Frequencies Reference from http://xahlee.info/comp/computer_language_char_distribution.html
@@ -125,19 +152,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
 )
 
-,[LAYER_GAMING] = LAYOUT_pretty( // gaming layer - WASD is moved one row to the right, with TGB moving to where QAZ is normally (and stuff like GRV becomes LCTL)
-//______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
- _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
-,_______ ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,_______
-,_______ ,KC_T    ,KC_Q    ,KC_W    ,KC_E    ,KC_R                               /**/                           ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,_______
-,_______ ,KC_G    ,KC_A    ,KC_S    ,KC_D    ,KC_F                               /**/                           ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,_______
-,_______ ,KC_B    ,KC_Z    ,KC_X    ,KC_C    ,KC_V                               /**/                           ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,_______
-         ,KC_LCTL ,KC_LALT ,KC_LEFT ,KC_RGHT                                     /**/                                    ,KC_UP   ,KC_DOWN ,KC_LBRC ,KC_RBRC
-                                                               ,KC_G    ,_______ /**/,_______ ,_______
-                                                                        ,_______ /**/,_______
-                                                      ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______
-)
-
 ,[LAYER_GUI] = LAYOUT_pretty( // mouse keys and other utilities
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
@@ -149,19 +163,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                ,KC_ACL0 ,KC_BTN3 /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,KC_BTN1 ,_______ ,KC_BTN2 /**/,_______ ,_______ ,_______
-)
-
-,[LAYER_QWERTY] = LAYOUT_pretty( // qwerty layout, where every key does what it says on the keyboard (except maybe one or two of the function keys)
-//______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
- TRU_ESC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,KC_F6   ,KC_F7   ,KC_F8   /**/,KC_F9   ,KC_F10  ,KC_F11  ,KC_F12  ,KC_PSCR ,KC_SLCK ,KC_PAUS ,KC_INS  ,LAY_ADJ
-,KC_EQL  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
-,KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T                               /**/                           ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_BSLS
-,KC_CAPS ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G                               /**/                           ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOT
-,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT
-         ,KC_GRV  ,KC_PIPE ,KC_LEFT ,KC_RGHT                                     /**/                                    ,KC_UP   ,KC_DOWN ,KC_LBRC ,KC_RBRC
-                                                               ,KC_LCTL ,KC_LALT /**/,KC_RGUI  ,KC_RCTL
-                                                                        ,KC_HOME /**/,KC_PGUP
-                                                      ,KC_BSPC ,KC_DEL  ,KC_END  /**/,KC_PGDN ,KC_ENT  ,KC_SPC
 )
 
 ,[LAYER_ADJUST] = LAYOUT_pretty( // configure the keyboard
@@ -176,8 +177,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                         ,XXXXXXX /**/,XXXXXXX
                                                       ,XXXXXXX ,XXXXXXX ,XXXXXXX /**/,XXXXXXX ,XXXXXXX ,XXXXXXX
 )
-
-
 
 ,[LAYER_TEMPLATE] = LAYOUT_pretty( // template layer, for easy copy pasting to make a new layer
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
@@ -246,7 +245,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_TAP(X_HOME)SS_TAP(X_HOME)SS_DOWN(X_LSFT)SS_TAP(X_END)SS_TAP(X_RGHT)SS_UP(X_LSFT)SS_TAP(X_DEL));
       }
       break;
-    case LAY_GUI:
+    case OSL_GUI:
       if (ctlesc_down) {
         if (record->event.pressed) {
           if (!alt_tab_activated) {
