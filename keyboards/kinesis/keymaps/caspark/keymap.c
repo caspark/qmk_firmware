@@ -67,7 +67,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LAY_EDT  MO(LAYER_EDITING) // momentary layer
 #define OSL_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 #define MO_GUI   MO(LAYER_GUI) // momentary layer
-#define TAB_GUI  LT(LAYER_GUI, KC_ENTER) // layer or tab
+#define TAB_GUI  LT(LAYER_GUI, KC_TAB) // layer or tab
 
 // special alt tab replacement: hold CTL_ESC and hit OSL_GUI one or more times to trigger alt tab
 bool ctlesc_down;
