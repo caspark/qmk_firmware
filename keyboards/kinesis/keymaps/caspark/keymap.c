@@ -50,7 +50,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define CLS_TAB  LCTL(KC_F4)
 #define CLS_WIN  LALT(KC_F4)
 // mod taps - https://docs.qmk.fm/#/mod_tap
-#define CTLESC   MT(MOD_LCTL, KC_ESC)
+#define CTL_ESC   MT(MOD_LCTL, KC_ESC)
 // one shot modifiers - https://docs.qmk.fm/#/one_shot_keys
 #define ONE_ALT  OSM(MOD_LALT)
 // tap tances - https://docs.qmk.fm/#/feature_tap_dance
@@ -59,8 +59,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or enter
 #define LAY_EDT  MO(LAYER_EDITING) // momentary layer
 #define LAY_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
+#define TAB_GUI  LT(LAYER_GUI, KC_ENTER) // layer or tab
 
-// special alt tab replacement: hold CTLESC and hit LAY_GUI one or more times to trigger alt tab
+// special alt tab replacement: hold CTL_ESC and hit LAY_GUI one or more times to trigger alt tab
 bool ctlesc_down;
 bool alt_tab_activated;
 
@@ -74,14 +75,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [LAYER_COLEMAK] = LAYOUT_pretty( // default base layer
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  TRU_ESC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,KC_F6   ,KC_F7   ,KC_F8   /**/,KC_F9   ,KC_F10  ,KC_F11  ,KC_F12  ,KC_PSCR ,KC_SLCK ,KC_PAUS ,KC_INS  ,RESET
-,KC_GRV  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
+,KC_PLUS ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5                               /**/                           ,KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_MINS
 ,KC_TAB  ,KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_G                               /**/                           ,KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_BSLS
 ,LAY_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_D                               /**/                           ,KC_H    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B                               /**/                           ,KC_K    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
-         ,XXXXXXX ,KC_LGUI ,KC_LABK ,KC_RABK                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
-                                                               ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,KC_TAB
+         ,XXXXXXX ,KC_LGUI ,KC_GRV  ,KC_EQL                                      /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
+                                                               ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,TAB_GUI
                                                                         ,ONE_ALT /**/,KC_PGUP
-                                                      ,KC_SPC  ,CTLESC  ,COLONS  /**/,KC_PGDN ,ENT_SYM  ,KC_BSPC
+                                                      ,KC_SPC  ,CTL_ESC ,COLONS  /**/,KC_PGDN ,ENT_SYM ,KC_BSPC
 )
 
 // Character Frequencies Reference from http://xahlee.info/comp/computer_language_char_distribution.html
@@ -94,11 +95,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,[LAYER_SYMBOLS] = LAYOUT_pretty( // function keys on number row, numbers and symbols on home row
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
-,KC_F12  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5                              /**/                           ,KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11
-,_______ ,_______ ,_______ ,KC_HASH ,KC_LBRC ,KC_RBRC                            /**/                           ,_______ ,KC_AMPR ,KC_1    ,KC_BSLS ,KC_COLN ,KC_PIPE
-,_______ ,KC_QUES ,KC_PLUS ,KC_EQL  ,KC_LPRN ,KC_RPRN                            /**/                           ,KC_COLN ,KC_UNDS ,KC_0    ,KC_MINS ,KC_PIPE ,KC_DQUO
-,_______ ,_______ ,KC_TILD ,KC_SLSH ,KC_LCBR ,KC_RCBR                            /**/                           ,_______ ,KC_ASTR ,_______ ,_______ ,_______, _______
-         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______ ,_______
+,KC_EQL  ,KC_EXLM ,KC_AT   ,KC_HASH ,KC_DLR  ,KC_PERC                            /**/                           ,KC_CIRC ,KC_AMPR ,KC_ASTR ,KC_LPRN ,KC_RPRN ,KC_UNDS
+,_______ ,_______ ,_______ ,_______ ,KC_LBRC ,KC_RBRC                            /**/                           ,_______ ,KC_1    ,KC_0    ,KC_BSLS ,KC_SCLN ,KC_PIPE
+,_______ ,KC_QUES ,KC_PLUS ,KC_EQL  ,KC_LPRN ,KC_RPRN                            /**/                           ,_______ ,KC_UNDS ,KC_COLN ,KC_MINS ,KC_PIPE ,KC_DQUO
+,_______ ,KC_GRV  ,KC_TILD ,KC_SLSH ,KC_LCBR ,KC_RCBR                            /**/                           ,_______ ,KC_ASTR ,_______ ,_______ ,_______, _______
+         ,_______ ,_______ ,KC_LABK ,KC_RABK                                     /**/                                    ,_______ ,_______ ,_______ ,_______
                                                                ,_______ ,_______ /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______
@@ -120,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,[LAYER_GUI] = LAYOUT_pretty( // mouse keys and other utilities
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
-,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
+,KC_F12  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5                              /**/                           ,KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11
 ,_______ ,XXXXXXX ,KC_WH_L ,KC_MS_U ,KC_WH_R ,KC_WH_U                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,_______ ,CLS_TAB ,_______ ,_______                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
@@ -212,7 +213,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       break;
-    case CTLESC:
+    case CTL_ESC:
       if (record->event.pressed) {
         ctlesc_down = true;
       } else {
