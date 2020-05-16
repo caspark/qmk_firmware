@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,_______ ,KC_B    ,KC_Z    ,KC_X    ,KC_C    ,KC_V                               /**/                           ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,_______
          ,KC_LCTL ,KC_LALT ,KC_LEFT ,KC_RGHT                                     /**/                                    ,KC_UP   ,KC_DOWN ,KC_LBRC ,KC_RBRC
                                                                ,KC_G    ,_______ /**/,_______ ,_______
-                                                                        ,_______ /**/,_______
+                                                                        ,KC_LALT /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______
 )
 
