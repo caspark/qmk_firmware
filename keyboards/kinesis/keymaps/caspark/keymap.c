@@ -75,7 +75,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 bool ctlesc_down;
 bool alt_tab_activated;
 
-#define MANY_WORD_REPEAT_DELAY_MS 10
+#define MANY_WORD_REPEAT_DELAY_MS 5
 uint16_t many_word_up_timer;
 bool many_word_up_held;
 uint16_t many_word_down_timer;
@@ -151,8 +151,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,DOCHOME ,XXXXXXX ,DOCEND  ,_______ ,_______
 ,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,KC_HOME ,KC_UP   ,KC_END  ,XXXXXXX ,_______
 ,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,WRDLFT  ,KC_LEFT ,KC_DOWN ,KC_RGHT ,WRDRGT  ,XXXXXXX
-,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,WRDDEL
-         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,MNYLEFT ,MNYDOWN ,MNYUP   ,MNYRGHT
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,MNYLEFT ,MNYDOWN ,MNYUP   ,MNYRGHT ,WRDDEL
+         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,SWRDLFT ,SEL_DWN ,SEL_UP  ,SWRDRGT
                                                                ,_______ ,_______ /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
