@@ -13,8 +13,10 @@ enum kinesis_layers {
 
 enum custom_keycodes {
   TRU_ESC = SAFE_RANGE, // send escape but also reset to default layer
-  MNYUP, // hit up a bunch of times
-  MNYDOWN, // hit down a bunch of times
+  MNYUP, // hit up at a high key repeat rate
+  MNYDOWN, // hit down at a high key repeat rate
+  MNYLEFT, // hit left at a high key repeat rate
+  MNYRGHT, // hit right at a high key repeat rate
   RM_LINE, // remove the current line of text
 };
 
@@ -73,11 +75,15 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 bool ctlesc_down;
 bool alt_tab_activated;
 
-#define MANY_WORD_REPEAT_DELAY_MS 5
+#define MANY_WORD_REPEAT_DELAY_MS 10
 uint16_t many_word_up_timer;
 bool many_word_up_held;
 uint16_t many_word_down_timer;
 bool many_word_down_held;
+uint16_t many_word_left_timer;
+bool many_word_left_held;
+uint16_t many_word_right_timer;
+bool many_word_right_held;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [LAYER_COLEMAK] = LAYOUT_pretty( // default base layer
@@ -142,11 +148,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,[LAYER_EDITING] = LAYOUT_pretty( // arrow keys and other editing aids
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
-,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,DOCHOME ,MNYUP   ,DOCEND  ,_______ ,_______
+,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,DOCHOME ,XXXXXXX ,DOCEND  ,_______ ,_______
 ,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,KC_HOME ,KC_UP   ,KC_END  ,XXXXXXX ,_______
 ,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,WRDLFT  ,KC_LEFT ,KC_DOWN ,KC_RGHT ,WRDRGT  ,XXXXXXX
-,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,XXXXXXX ,MNYDOWN ,XXXXXXX ,XXXXXXX ,WRDDEL
-         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,_______ ,_______ ,_______, _______
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,WRDDEL
+         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,MNYLEFT ,MNYDOWN ,MNYUP   ,MNYRGHT
                                                                ,_______ ,_______ /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
@@ -205,6 +211,12 @@ void matrix_scan_user(void) {
   } else if (many_word_down_held && timer_elapsed(many_word_down_timer) > MANY_WORD_REPEAT_DELAY_MS) {
     tap_code(KC_DOWN);
     many_word_down_timer = timer_read();
+  } else if (many_word_left_held && timer_elapsed(many_word_left_timer) > MANY_WORD_REPEAT_DELAY_MS) {
+    tap_code(KC_LEFT);
+    many_word_left_timer = timer_read();
+  } else if (many_word_right_held && timer_elapsed(many_word_right_timer) > MANY_WORD_REPEAT_DELAY_MS) {
+    tap_code(KC_RGHT);
+    many_word_right_timer = timer_read();
   }
 }
 
@@ -234,6 +246,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         many_word_down_timer = timer_read();
       } else {
         many_word_down_held = false;
+      }
+      break;
+    case MNYLEFT:
+      if (record->event.pressed) {
+        tap_code(KC_LEFT);
+        many_word_left_held = true;
+        many_word_left_timer = timer_read();
+      } else {
+        many_word_left_held = false;
+      }
+      break;
+    case MNYRGHT:
+      if (record->event.pressed) {
+        tap_code(KC_RGHT);
+        many_word_right_held = true;
+        many_word_right_timer = timer_read();
+      } else {
+        many_word_right_held = false;
       }
       break;
     case RM_LINE:
