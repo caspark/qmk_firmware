@@ -148,14 +148,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,[LAYER_EDITING] = LAYOUT_pretty( // arrow keys and other editing aids
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
-,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,DOCHOME ,XXXXXXX ,DOCEND  ,_______ ,_______
+,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,KC_HOME ,KC_UP   ,KC_END  ,XXXXXXX ,_______
-,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,WRDLFT  ,KC_LEFT ,KC_DOWN ,KC_RGHT ,WRDRGT  ,XXXXXXX
-,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,MNYLEFT ,MNYDOWN ,MNYUP   ,MNYRGHT ,WRDDEL
-         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,SWRDLFT ,SEL_DWN ,SEL_UP  ,SWRDRGT
+,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,SEL_LFT ,KC_LEFT ,KC_DOWN ,KC_RGHT ,SEL_RGT ,XXXXXXX
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,WRDLFT  ,MNYUP   ,WRDRGT  ,XXXXXXX ,WRDDEL
+         ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,SWRDLFT ,MNYDOWN ,SWRDRGT ,XXXXXXX
                                                                ,_______ ,_______ /**/,_______ ,_______
-                                                                        ,_______ /**/,_______
-                                                      ,_______ ,_______ ,_______ /**/,_______ ,_______ ,WRDBSPC
+                                                                        ,_______ /**/,DOCHOME
+                                                      ,_______ ,_______ ,_______ /**/,DOCEND  ,_______ ,WRDBSPC
 )
 
 ,[LAYER_GUI] = LAYOUT_pretty( // mouse keys and other utilities
