@@ -75,28 +75,30 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 bool ctlesc_down;
 bool alt_tab_activated;
 
-#define MANY_WORD_REPEAT_DELAY_MS 5
-#define MANY_WORD_REPEAT_DELAY_INITIAL 15
-#define MANY_SETUP(name, keycode)  \
-uint16_t many_word_##name##_timer; \
-bool many_word_##name##_held; \
-uint16_t many_word_##name##_underlying = keycode;
-#define MANY_PRESSED(name)  if (record->event.pressed) { \
-  tap_code(many_word_##name##_underlying); \
-  many_word_##name##_held = true; \
-  many_word_##name##_timer = timer_read(); \
+// "many press" is a way to override operating system's key repeat logic to get keys to repeat
+// faster or with less delay before the repeating starts.
+#define MANY_PRESS_REPEAT_DELAY_MS 5
+#define MANY_PRESS_REPEAT_DELAY_INITIAL 15
+#define MANY_PRESS_INIT(name, keycode)  \
+uint16_t many_press_##name##_timer; \
+bool many_press_##name##_held; \
+uint16_t many_press_##name##_underlying = keycode;
+#define MANY_PRESS_PROCESS_RECORD(name)  if (record->event.pressed) { \
+  tap_code(many_press_##name##_underlying); \
+  many_press_##name##_held = true; \
+  many_press_##name##_timer = timer_read(); \
 } else { \
-  many_word_##name##_held = false; \
+  many_press_##name##_held = false; \
 }
-#define IF_MANY_HELD_THEN_REPEAT(name) if (many_word_##name##_held && timer_elapsed(many_word_##name##_timer) > MANY_WORD_REPEAT_DELAY_MS) { \
-  tap_code(many_word_##name##_underlying); \
-  many_word_##name##_timer = timer_read(); \
+#define MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(name) if (many_press_##name##_held && timer_elapsed(many_press_##name##_timer) > MANY_PRESS_REPEAT_DELAY_MS) { \
+  tap_code(many_press_##name##_underlying); \
+  many_press_##name##_timer = timer_read(); \
 }
 
-MANY_SETUP(up, KC_UP)
-MANY_SETUP(down, KC_DOWN)
-MANY_SETUP(left, KC_LEFT)
-MANY_SETUP(right, KC_RGHT)
+MANY_PRESS_INIT(up, KC_UP)
+MANY_PRESS_INIT(down, KC_DOWN)
+MANY_PRESS_INIT(left, KC_LEFT)
+MANY_PRESS_INIT(right, KC_RGHT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [LAYER_COLEMAK] = LAYOUT_pretty( // default base layer
@@ -218,10 +220,10 @@ void matrix_init_user(void) {
 }
 
 void matrix_scan_user(void) {
-  IF_MANY_HELD_THEN_REPEAT(up)
-  else IF_MANY_HELD_THEN_REPEAT(down)
-  else IF_MANY_HELD_THEN_REPEAT(left)
-  else IF_MANY_HELD_THEN_REPEAT(right)
+  MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(up)
+  else MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(down)
+  else MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(left)
+  else MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(right)
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -235,16 +237,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     break;
     case MNYUP:
-      MANY_PRESSED(up);
+      MANY_PRESS_PROCESS_RECORD(up);
       break;
     case MNYDOWN:
-      MANY_PRESSED(down);
+      MANY_PRESS_PROCESS_RECORD(down);
       break;
     case MNYLEFT:
-      MANY_PRESSED(left);
+      MANY_PRESS_PROCESS_RECORD(left);
       break;
     case MNYRGHT:
-      MANY_PRESSED(right);
+      MANY_PRESS_PROCESS_RECORD(right);
       break;
     case RM_LINE:
       if (record->event.pressed) {
