@@ -76,14 +76,27 @@ bool ctlesc_down;
 bool alt_tab_activated;
 
 #define MANY_WORD_REPEAT_DELAY_MS 5
-uint16_t many_word_up_timer;
-bool many_word_up_held;
-uint16_t many_word_down_timer;
-bool many_word_down_held;
-uint16_t many_word_left_timer;
-bool many_word_left_held;
-uint16_t many_word_right_timer;
-bool many_word_right_held;
+#define MANY_WORD_REPEAT_DELAY_INITIAL 15
+#define MANY_SETUP(name, keycode)  \
+uint16_t many_word_##name##_timer; \
+bool many_word_##name##_held; \
+uint16_t many_word_##name##_underlying = keycode;
+#define MANY_PRESSED(name)  if (record->event.pressed) { \
+  tap_code(many_word_##name##_underlying); \
+  many_word_##name##_held = true; \
+  many_word_##name##_timer = timer_read(); \
+} else { \
+  many_word_##name##_held = false; \
+}
+#define IF_MANY_HELD_THEN_REPEAT(name) if (many_word_##name##_held && timer_elapsed(many_word_##name##_timer) > MANY_WORD_REPEAT_DELAY_MS) { \
+  tap_code(many_word_##name##_underlying); \
+  many_word_##name##_timer = timer_read(); \
+}
+
+MANY_SETUP(up, KC_UP)
+MANY_SETUP(down, KC_DOWN)
+MANY_SETUP(left, KC_LEFT)
+MANY_SETUP(right, KC_RGHT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [LAYER_COLEMAK] = LAYOUT_pretty( // default base layer
@@ -205,19 +218,10 @@ void matrix_init_user(void) {
 }
 
 void matrix_scan_user(void) {
-  if (many_word_up_held && timer_elapsed(many_word_up_timer) > MANY_WORD_REPEAT_DELAY_MS) {
-    tap_code(KC_UP);
-    many_word_up_timer = timer_read();
-  } else if (many_word_down_held && timer_elapsed(many_word_down_timer) > MANY_WORD_REPEAT_DELAY_MS) {
-    tap_code(KC_DOWN);
-    many_word_down_timer = timer_read();
-  } else if (many_word_left_held && timer_elapsed(many_word_left_timer) > MANY_WORD_REPEAT_DELAY_MS) {
-    tap_code(KC_LEFT);
-    many_word_left_timer = timer_read();
-  } else if (many_word_right_held && timer_elapsed(many_word_right_timer) > MANY_WORD_REPEAT_DELAY_MS) {
-    tap_code(KC_RGHT);
-    many_word_right_timer = timer_read();
-  }
+  IF_MANY_HELD_THEN_REPEAT(up)
+  else IF_MANY_HELD_THEN_REPEAT(down)
+  else IF_MANY_HELD_THEN_REPEAT(left)
+  else IF_MANY_HELD_THEN_REPEAT(right)
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -231,40 +235,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     break;
     case MNYUP:
-      if (record->event.pressed) {
-        tap_code(KC_UP);
-        many_word_up_held = true;
-        many_word_up_timer = timer_read();
-      } else {
-        many_word_up_held = false;
-      }
+      MANY_PRESSED(up);
       break;
     case MNYDOWN:
-      if (record->event.pressed) {
-        tap_code(KC_DOWN);
-        many_word_down_held = true;
-        many_word_down_timer = timer_read();
-      } else {
-        many_word_down_held = false;
-      }
+      MANY_PRESSED(down);
       break;
     case MNYLEFT:
-      if (record->event.pressed) {
-        tap_code(KC_LEFT);
-        many_word_left_held = true;
-        many_word_left_timer = timer_read();
-      } else {
-        many_word_left_held = false;
-      }
+      MANY_PRESSED(left);
       break;
     case MNYRGHT:
-      if (record->event.pressed) {
-        tap_code(KC_RGHT);
-        many_word_right_held = true;
-        many_word_right_timer = timer_read();
-      } else {
-        many_word_right_held = false;
-      }
+      MANY_PRESSED(right);
       break;
     case RM_LINE:
       if (record->event.pressed) {
