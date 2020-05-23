@@ -150,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,KC_HOME ,KC_UP   ,KC_END  ,XXXXXXX ,_______
-,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,SEL_LFT ,KC_LEFT ,KC_DOWN ,KC_RGHT ,SEL_RGT ,XXXXXXX
+,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,MNYLEFT ,KC_LEFT ,KC_DOWN ,KC_RGHT ,MNYRGHT ,XXXXXXX
 ,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,WRDLFT  ,MNYUP   ,WRDRGT  ,XXXXXXX ,WRDDEL
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,SWRDLFT ,MNYDOWN ,SWRDRGT ,XXXXXXX
                                                                ,_______ ,_______ /**/,_______ ,_______
