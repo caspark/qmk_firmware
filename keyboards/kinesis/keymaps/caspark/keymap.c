@@ -78,10 +78,11 @@ bool alt_tab_activated;
 // "many press" is a way to override operating system's key repeat logic to get keys to repeat
 // faster or with less delay before the repeating starts.
 #define MANY_PRESS_REPEAT_DELAY_MS 5
-#define MANY_PRESS_REPEAT_DELAY_INITIAL 15
+#define MANY_PRESS_REPEAT_DELAY_INITIAL_MS 100
 #define MANY_PRESS_INIT(name, keycode)  \
 uint16_t many_press_##name##_timer; \
 bool many_press_##name##_held; \
+bool many_press_##name##_repeating; \
 uint16_t many_press_##name##_underlying = keycode;
 #define MANY_PRESS_PROCESS_RECORD(name)  if (record->event.pressed) { \
   tap_code(many_press_##name##_underlying); \
@@ -89,8 +90,15 @@ uint16_t many_press_##name##_underlying = keycode;
   many_press_##name##_timer = timer_read(); \
 } else { \
   many_press_##name##_held = false; \
+  many_press_##name##_repeating = false; \
 }
-#define MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(name) if (many_press_##name##_held && timer_elapsed(many_press_##name##_timer) > MANY_PRESS_REPEAT_DELAY_MS) { \
+#define MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(name) if (many_press_##name##_held && \
+    ( \
+      (many_press_##name##_repeating && timer_elapsed(many_press_##name##_timer) > MANY_PRESS_REPEAT_DELAY_MS) \
+    || \
+      (!many_press_##name##_repeating && timer_elapsed(many_press_##name##_timer) > MANY_PRESS_REPEAT_DELAY_INITIAL_MS) \
+    )) { \
+  many_press_##name##_repeating = true; \
   tap_code(many_press_##name##_underlying); \
   many_press_##name##_timer = timer_read(); \
 }
