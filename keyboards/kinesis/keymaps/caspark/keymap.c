@@ -23,9 +23,53 @@ enum custom_keycodes {
 // Tap dancing setup - https://docs.qmk.fm/#/feature_tap_dance
 enum {
   TD_COLON = 0,
+  LT_COLON,
 };
+typedef enum {
+  SINGLE_TAP,
+  SINGLE_HOLD,
+  DOUBLE_SINGLE_TAP,
+} td_state_t;
+static td_state_t lt_colon_state;
+// determine the tapdance state to return
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) {
+    if (state->interrupted || !state->pressed) { return SINGLE_TAP; }
+    else { return SINGLE_HOLD; }
+  }
+  if (state->count == 2) { return DOUBLE_SINGLE_TAP; }
+  else { return 3; } // any number higher than the maximum state value you return above
+}
+// handle the possible states for each tapdance keycode you define:
+void lt_colon_finished (qk_tap_dance_state_t *state, void *user_data) {
+  lt_colon_state = cur_dance(state);
+  switch (lt_colon_state) {
+    case SINGLE_TAP:
+      register_code16(KC_COLN);
+      break;
+    case SINGLE_HOLD:
+      layer_on(LAYER_EDITING);
+      break;
+    case DOUBLE_SINGLE_TAP: // allow nesting of 2 parens `((` within tapping term
+      tap_code16(KC_COLN);
+      register_code16(KC_COLN);
+  }
+}
+void lt_colon_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (lt_colon_state) {
+    case SINGLE_TAP:
+      unregister_code16(KC_COLN);
+      break;
+    case SINGLE_HOLD:
+      layer_off(LAYER_EDITING);
+      break;
+    case DOUBLE_SINGLE_TAP:
+      unregister_code16(KC_COLN);
+  }
+}
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_COLON] = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_SCLN),
+  [LT_COLON] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lt_colon_finished, lt_colon_reset),
 };
 
 // Aliases for longer keycodes
@@ -66,7 +110,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LAY_QWE  DF(LAYER_QWERTY) // set default layer
 #define LAY_GAM  DF(LAYER_GAMING) // set default layer
 #define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or enter
-#define LAY_EDT  MO(LAYER_EDITING) // momentary layer
+#define LAY_EDT  TD(LT_COLON) // layer or tab
 #define OSL_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 #define MO_GUI   MO(LAYER_GUI) // momentary layer
 #define TAB_GUI  LT(LAYER_GUI, KC_TAB) // layer or tab
