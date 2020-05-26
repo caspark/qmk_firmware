@@ -13,6 +13,7 @@ enum kinesis_layers {
 
 enum custom_keycodes {
   TRU_ESC = SAFE_RANGE, // send escape but also reset to default layer
+  CLN_EDT,
   MNYUP, // hit up at a high key repeat rate
   MNYDOWN, // hit down at a high key repeat rate
   MNYLEFT, // hit left at a high key repeat rate
@@ -23,53 +24,9 @@ enum custom_keycodes {
 // Tap dancing setup - https://docs.qmk.fm/#/feature_tap_dance
 enum {
   TD_COLON = 0,
-  LT_COLON,
 };
-typedef enum {
-  SINGLE_TAP,
-  SINGLE_HOLD,
-  DOUBLE_SINGLE_TAP,
-} td_state_t;
-static td_state_t lt_colon_state;
-// determine the tapdance state to return
-int cur_dance (qk_tap_dance_state_t *state) {
-  if (state->count == 1) {
-    if (state->interrupted || !state->pressed) { return SINGLE_TAP; }
-    else { return SINGLE_HOLD; }
-  }
-  if (state->count == 2) { return DOUBLE_SINGLE_TAP; }
-  else { return 3; } // any number higher than the maximum state value you return above
-}
-// handle the possible states for each tapdance keycode you define:
-void lt_colon_finished (qk_tap_dance_state_t *state, void *user_data) {
-  lt_colon_state = cur_dance(state);
-  switch (lt_colon_state) {
-    case SINGLE_TAP:
-      register_code16(KC_COLN);
-      break;
-    case SINGLE_HOLD:
-      layer_on(LAYER_EDITING);
-      break;
-    case DOUBLE_SINGLE_TAP: // allow nesting of 2 parens `((` within tapping term
-      tap_code16(KC_COLN);
-      register_code16(KC_COLN);
-  }
-}
-void lt_colon_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (lt_colon_state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_COLN);
-      break;
-    case SINGLE_HOLD:
-      layer_off(LAYER_EDITING);
-      break;
-    case DOUBLE_SINGLE_TAP:
-      unregister_code16(KC_COLN);
-  }
-}
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_COLON] = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_SCLN),
-  [LT_COLON] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lt_colon_finished, lt_colon_reset),
 };
 
 // Aliases for longer keycodes
@@ -110,7 +67,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LAY_QWE  DF(LAYER_QWERTY) // set default layer
 #define LAY_GAM  DF(LAYER_GAMING) // set default layer
 #define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or enter
-#define LAY_EDT  TD(LT_COLON) // layer or tab
+#define LAY_EDT  CLN_EDT // layer or tab
 #define OSL_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 #define MO_GUI   MO(LAYER_GUI) // momentary layer
 #define TAB_GUI  LT(LAYER_GUI, KC_TAB) // layer or tab
@@ -118,6 +75,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // special alt tab replacement: hold CTL_ESC and hit OSL_GUI one or more times to trigger alt tab
 bool ctlesc_down;
 bool alt_tab_activated;
+
+// colon "layer tap", which we can't do using the LT macro because colon is not a standard keycode
+// (and using tap dance means that interuptions before the "hold" point will send the colon)
+bool lt_colon_held;
+bool lt_colon_other_key_pressed;
 
 // "many press" is a way to override operating system's key repeat logic to get keys to repeat
 // faster or with less delay before the repeating starts.
@@ -279,6 +241,25 @@ void matrix_scan_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (keycode == CLN_EDT) {
+    if (record->event.pressed) {
+      lt_colon_held = true;
+      layer_on(LAYER_EDITING);
+      lt_colon_other_key_pressed = false;
+    } else {
+      lt_colon_held = false;
+      layer_off(LAYER_EDITING);
+      if (!lt_colon_other_key_pressed) {
+        register_code(KC_LSFT);
+        tap_code(KC_SCLN);
+        unregister_code(KC_LSFT);
+      }
+    }
+    return false;
+  } else {
+    lt_colon_other_key_pressed = true;
+  }
+
   switch (keycode) {
     case TRU_ESC:
       if (record->event.pressed) {
