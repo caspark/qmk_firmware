@@ -55,6 +55,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define REDO     LCTL(KC_Y)
 #define CLS_TAB  LCTL(KC_F4)
 #define CLS_WIN  LALT(KC_F4)
+#define CTL_SPC  LCTL(KC_SPC)
 // mod taps - https://docs.qmk.fm/#/mod_tap
 #define CTL_ESC   MT(MOD_LCTL, KC_ESC)
 // one shot modifiers - https://docs.qmk.fm/#/one_shot_keys
@@ -124,9 +125,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,OSL_GUI ,KC_A    ,KC_R    ,KC_S    ,KC_T    ,KC_G                               /**/                           ,KC_M    ,KC_N    ,KC_E    ,KC_I    ,KC_O    ,KC_QUOT
 ,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_D    ,KC_B                               /**/                           ,KC_K    ,KC_H    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
          ,KC_GRV  ,KC_LGUI ,KC_LBRC ,KC_RBRC                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
-                                                               ,LAY_EDT ,KC_CAPS /**/,XXXXXXX ,TAB_GUI
+                                                               ,LAY_EDT ,CTL_SPC /**/,XXXXXXX ,TAB_GUI
                                                                         ,ONE_ALT /**/,KC_PGUP
-                                                      ,KC_SPC  ,CTL_ESC ,COLONS  /**/,KC_PGDN ,ENT_SYM ,KC_BSPC
+                                                      ,KC_SPC  ,CTL_ESC ,KC_CAPS /**/,KC_PGDN ,ENT_SYM ,KC_BSPC
 )
 
 ,[LAYER_QWERTY] = LAYOUT_pretty( // qwerty layout, where every key does what it says on the keyboard (except maybe one or two of the function keys)
