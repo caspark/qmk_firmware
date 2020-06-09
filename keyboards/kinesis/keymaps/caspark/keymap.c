@@ -79,6 +79,7 @@ bool alt_tab_activated;
 // colon "layer tap", which we can't do using the LT macro because colon is not a standard keycode
 // (and using tap dance means that interuptions before the "hold" point will send the colon)
 bool lt_colon_held;
+uint16_t lt_colon_held_timer;
 bool lt_colon_other_key_pressed;
 
 // "many press" is a way to override operating system's key repeat logic to get keys to repeat
@@ -244,12 +245,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (keycode == CLN_EDT) {
     if (record->event.pressed) {
       lt_colon_held = true;
+      lt_colon_held_timer = timer_read();
       layer_on(LAYER_EDITING);
       lt_colon_other_key_pressed = false;
     } else {
       lt_colon_held = false;
       layer_off(LAYER_EDITING);
-      if (!lt_colon_other_key_pressed) {
+      if (!lt_colon_other_key_pressed && timer_elapsed(lt_colon_held_timer) < TAPPING_TERM) {
         register_code(KC_LSFT);
         tap_code(KC_SCLN);
         unregister_code(KC_LSFT);
