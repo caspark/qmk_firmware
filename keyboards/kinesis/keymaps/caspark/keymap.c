@@ -58,8 +58,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define CTL_SPC  LCTL(KC_SPC)
 // mod taps - https://docs.qmk.fm/#/mod_tap
 #define CTL_ESC   MT(MOD_LCTL, KC_ESC)
-// one shot modifiers - https://docs.qmk.fm/#/one_shot_keys
-#define ONE_ALT  OSM(MOD_LALT)
 // tap tances - https://docs.qmk.fm/#/feature_tap_dance
 #define COLONS   TD(TD_COLON)
 // layers - https://docs.qmk.fm/#/feature_layers
@@ -126,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_D    ,KC_B                               /**/                           ,KC_K    ,KC_H    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_DEL
          ,KC_GRV  ,KC_LGUI ,KC_LBRC ,KC_RBRC                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
                                                                ,LAY_EDT ,CTL_SPC /**/,XXXXXXX ,TAB_GUI
-                                                                        ,ONE_ALT /**/,KC_PGUP
+                                                                        ,KC_LALT /**/,KC_PGUP
                                                       ,KC_SPC  ,CTL_ESC ,KC_CAPS /**/,KC_PGDN ,ENT_SYM ,KC_BSPC
 )
 
