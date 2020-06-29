@@ -33,6 +33,12 @@ TODO:
 
 ## Developing
 
+Emacs compile command from within WSL:
+
+```
+qmk compile --keyboard kinesis/stapelberg --keymap caspark && cp ~/src/qmk_firmware/kinesis_stapelberg_caspark.hex /mnt/c/temp/
+```
+
 Set up vscode tasks:
 
 ```bash
