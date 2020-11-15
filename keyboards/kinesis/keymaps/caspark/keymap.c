@@ -201,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,_______ ,XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
 ,_______ ,_______ ,_______ ,CLS_TAB ,_______ ,_______                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
          ,_______ ,_______ ,_______ ,CLS_WIN                                     /**/                                    ,WA_LEFT ,WA_DOWN ,WA_UP   ,WA_RGHT
-                                                               ,KC_ACL0 ,KC_BTN3 /**/,_______ ,_______
+                                                               ,KC_BTN3 ,KC_ACL0 /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,KC_BTN1 ,_______ ,KC_BTN2 /**/,_______ ,_______ ,_______
 )
