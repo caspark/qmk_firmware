@@ -44,6 +44,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define SEL_END  LSFT(KC_END)
 #define ALT_UP   LALT(KC_UP)
 #define ALT_DWN  LALT(KC_DOWN)
+#define ALT_LFT  LALT(KC_LEFT)
+#define ALT_RGT  LALT(KC_RGHT)
 #define DOCHOME  LCTL(KC_HOME)
 #define DOCEND   LCTL(KC_END)
 #define UNDO     LCTL(KC_Z)
@@ -197,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,KC_F12  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5                              /**/                           ,KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11
 ,_______ ,XXXXXXX ,KC_WH_L ,KC_MS_U ,KC_WH_R ,KC_WH_U                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
 ,_______ ,XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
-,_______ ,_______ ,_______ ,CLS_TAB ,_______ ,_______                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
+,_______ ,_______ ,_______ ,CLS_TAB ,ALT_LFT ,ALT_RGT                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
          ,_______ ,_______ ,_______ ,CLS_WIN                                     /**/                                    ,WA_LEFT ,WA_DOWN ,WA_UP   ,WA_RGHT
                                                                ,KC_BTN3 ,KC_ACL0 /**/,_______ ,_______
                                                                         ,_______ /**/,_______
