@@ -46,8 +46,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define ALT_DWN  LALT(KC_DOWN)
 #define DOCHOME  LCTL(KC_HOME)
 #define DOCEND   LCTL(KC_END)
-#define WRDBSPC  LCTL(KC_BSPACE)
-#define WRDDEL   LCTL(KC_DEL)
 #define UNDO     LCTL(KC_Z)
 #define CUT      LCTL(KC_X)
 #define COPY     LCTL(KC_C)
@@ -186,11 +184,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ,_______ ,_______ ,_______ ,_______ ,_______ ,_______                            /**/                           ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,_______ ,_______ ,SEL_HOM ,SEL_UP  ,SEL_END ,RM_LINE                            /**/                           ,ALT_UP  ,KC_HOME ,MNYUP   ,KC_END  ,XXXXXXX ,_______
 ,_______ ,SWRDLFT ,SEL_LFT ,SEL_DWN ,SEL_RGT ,SWRDRGT                            /**/                           ,XXXXXXX ,MNYLEFT ,MNYDOWN ,MNYRGHT ,XXXXXXX ,XXXXXXX
-,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,WRDLFT  ,XXXXXXX ,WRDRGT  ,XXXXXXX ,WRDDEL
+,_______ ,UNDO    ,CUT     ,COPY    ,PASTE   ,REDO                               /**/                           ,ALT_DWN ,WRDLFT  ,XXXXXXX ,WRDRGT  ,XXXXXXX ,XXXXXXX
          ,_______ ,_______ ,_______ ,_______                                     /**/                                    ,KC_HOME ,KC_PGDN ,KC_PGUP ,KC_END
                                                                ,_______ ,_______ /**/,_______ ,_______
                                                                         ,_______ /**/,DOCHOME
-                                                      ,_______ ,_______ ,_______ /**/,DOCEND  ,_______ ,WRDBSPC
+                                                      ,_______ ,_______ ,_______ /**/,DOCEND  ,_______ ,_______
 )
 
 ,[LAYER_GUI] = LAYOUT_pretty( // mouse keys and other utilities
