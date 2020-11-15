@@ -71,13 +71,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define MO_GUI   MO(LAYER_GUI) // momentary layer
 #define TAB_GUI  LT(LAYER_GUI, KC_TAB) // layer or tab
 // workspacer shortcuts
-#define Z(KC__)  LWIN(LALT(KC__))
-#define Z_LEFT   Z(KC_LEFT)
-#define Z_DOWN   Z(KC_DOWN)
-#define Z_UP     Z(KC_UP)
-#define Z_RGHT   Z(KC_RGHT)
-#define Z_COMM   Z(KC_COMM)
-#define Z_DOT    Z(KC_DOT)
+#define WA(KC__) LWIN(LALT(KC__))
+#define WA_LEFT  WA(KC_LEFT)
+#define WA_DOWN  WA(KC_DOWN)
+#define WA_UP    WA(KC_UP)
+#define WA_RGHT  WA(KC_RGHT)
 
 // special alt tab replacement: hold CTL_ESC and hit OSL_GUI one or more times to trigger alt tab
 bool ctlesc_down;
@@ -199,10 +197,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
  _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ /**/,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______
 ,KC_F12  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5                              /**/                           ,KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11
-,_______ ,XXXXXXX ,KC_WH_L ,KC_MS_U ,KC_WH_R ,KC_WH_U                            /**/                           ,CLS_WIN ,Z(KC_L) ,Z(KC_U) ,Z(KC_Y) ,_______ ,_______
-,_______ ,XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D                            /**/                           ,Z(KC_M) ,Z(KC_N) ,Z(KC_E) ,Z(KC_I) ,Z(KC_O) ,_______
-,_______ ,_______ ,_______ ,CLS_TAB ,_______ ,_______                            /**/                           ,Z(KC_K) ,Z(KC_H) ,Z_COMM  ,Z_DOT   ,_______ ,_______
-         ,_______ ,_______ ,_______ ,CLS_WIN                                     /**/                                    ,Z_LEFT  ,Z_DOWN  ,Z_UP    ,Z_RGHT
+,_______ ,XXXXXXX ,KC_WH_L ,KC_MS_U ,KC_WH_R ,KC_WH_U                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
+,_______ ,XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
+,_______ ,_______ ,_______ ,CLS_TAB ,_______ ,_______                            /**/                           ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
+         ,_______ ,_______ ,_______ ,CLS_WIN                                     /**/                                    ,WA_LEFT ,WA_DOWN ,WA_UP   ,WA_RGHT
                                                                ,KC_ACL0 ,KC_BTN3 /**/,_______ ,_______
                                                                         ,_______ /**/,_______
                                                       ,KC_BTN1 ,_______ ,KC_BTN2 /**/,_______ ,_______ ,_______
