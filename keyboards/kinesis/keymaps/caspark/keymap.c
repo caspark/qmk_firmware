@@ -246,7 +246,52 @@ void matrix_scan_user(void) {
   else MANY_PRESS_IF_MANY_KEY_HELD_THEN_REPEAT(right)
 }
 
+
+uint16_t last_8_keys[] = {0,0,0,0,0,0,0,0};
+uint16_t last_key_pressed_in = 0;
+#define LAST_8_KEYS_WERE(k0, k1, k2, k3, k4, k5, k6, k7)  ((last_8_keys[0] == k0)  && (last_8_keys[1] == k1) && (last_8_keys[2] == k2) && (last_8_keys[3] == k3) && (last_8_keys[4] == k4) && (last_8_keys[5] == k5) && (last_8_keys[6] == k6) && (last_8_keys[7] == k7))
+#define HIT_BACKSPACE_8_TIMES  for (int i = 0; i < 8; i++) { tap_code(KC_BSPC); }
+#define CASPARK_COMBOS \
+static int caspark_combo_count = 1; \
+static uint16_t caspark_combo_1_keys[] = {KC_A, KC_B, KC_C, KC_D, KC_E, KC_F, KC_G, KC_DOT}; \
+static uint16_t *caspark_combo_keys[] = { \
+  caspark_combo_1_keys \
+}; \
+static char *caspark_combo_vals[] = { \
+  "abcdefg." \
+};
+#include "caspark_combos.h"
+CASPARK_COMBOS
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (!record->event.pressed) { // on key release
+    // update what keys have been pressed recently
+    last_8_keys[0] = last_8_keys[1];
+    last_8_keys[1] = last_8_keys[2];
+    last_8_keys[2] = last_8_keys[3];
+    last_8_keys[3] = last_8_keys[4];
+    last_8_keys[4] = last_8_keys[5];
+    last_8_keys[5] = last_8_keys[6];
+    last_8_keys[6] = last_8_keys[7];
+    last_8_keys[7] = keycode;
+
+    // now check if any of them match any of our registered combos
+    for(int i = 0; i < caspark_combo_count; i++) {
+      if (LAST_8_KEYS_WERE(caspark_combo_keys[i][0],
+                           caspark_combo_keys[i][1],
+                           caspark_combo_keys[i][2],
+                           caspark_combo_keys[i][3],
+                           caspark_combo_keys[i][4],
+                           caspark_combo_keys[i][5],
+                           caspark_combo_keys[i][6],
+                           caspark_combo_keys[i][7])) {
+        HIT_BACKSPACE_8_TIMES;
+        send_string(caspark_combo_vals[i]);
+        break;
+      }
+    }
+  }
+
   if (keycode == CLN_EDT) {
     if (record->event.pressed) {
       lt_colon_held = true;
