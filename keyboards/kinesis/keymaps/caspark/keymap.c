@@ -13,7 +13,7 @@ enum kinesis_layers {
 
 enum custom_keycodes {
   TRU_ESC = SAFE_RANGE, // send escape but also reset to default layer
-  CLN_EDT,
+  ESC_EDT,
   MNYUP, // hit up at a high key repeat rate
   MNYDOWN, // hit down at a high key repeat rate
   MNYLEFT, // hit left at a high key repeat rate
@@ -66,7 +66,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LAY_QWE  DF(LAYER_QWERTY) // set default layer
 #define LAY_GAM  DF(LAYER_GAMING) // set default layer
 #define ENT_SYM  LT(LAYER_SYMBOLS, KC_ENTER) // layer or enter
-#define LAY_EDT  CLN_EDT // layer or tab
+#define LAY_EDT  ESC_EDT // layer or tab
 #define OSL_GUI  OSL(LAYER_GUI) // one shot layer - hold to use layer, tap once to use once, or tap twice to toggle layer
 #define MO_GUI   MO(LAYER_GUI) // momentary layer
 #define TAB_GUI  LT(LAYER_GUI, KC_TAB) // layer or tab
@@ -131,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          ,KC_GRV  ,KC_LGUI ,KC_LBRC ,KC_RBRC                                     /**/                                    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
                                                                ,LAY_EDT ,CTL_SPC /**/,KC_LGUI ,TAB_GUI
                                                                         ,KC_LALT /**/,KC_PGUP
-                                                      ,KC_SPC  ,CTL_ESC ,KC_CAPS /**/,KC_PGDN ,ENT_SYM ,KC_BSPC
+                                                      ,KC_SPC  ,KC_LCTL ,KC_CAPS /**/,KC_PGDN ,ENT_SYM ,KC_BSPC
 )
 
 ,[LAYER_QWERTY] = LAYOUT_pretty( // qwerty layout, where every key does what it says on the keyboard (except maybe one or two of the function keys)
@@ -292,7 +292,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
   }
 
-  if (keycode == CLN_EDT) {
+  if (keycode == ESC_EDT) {
     if (record->event.pressed) {
       lt_colon_held = true;
       lt_colon_held_timer = timer_read();
@@ -302,9 +302,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       lt_colon_held = false;
       layer_off(LAYER_EDITING);
       if (!lt_colon_other_key_pressed && timer_elapsed(lt_colon_held_timer) < TAPPING_TERM) {
-        register_code(KC_LSFT);
-        tap_code(KC_SCLN);
-        unregister_code(KC_LSFT);
+        tap_code(KC_ESC);
       }
     }
     return false;
